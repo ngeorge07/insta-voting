@@ -10,10 +10,15 @@ import { Field, Form, Formik, FieldProps } from "formik";
 import { auth } from "../createFirebase";
 
 export default function SignIn() {
-  function validateEmail(value: string) {
+  function validateValue(value: string, type: string) {
     let error;
     if (!value) {
-      error = "Email is required";
+      error = `${type} can't be empty`;
+    } else if (
+      type === "Email" &&
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ) {
+      error = "Invalid email address";
     }
     return error;
   }
@@ -32,13 +37,21 @@ export default function SignIn() {
     >
       {(props) => (
         <Form className="w-full flex flex-col">
-          <Field type="email" name="email" validate={validateEmail}>
+          <Field
+            name="email"
+            validate={(value: string) => validateValue(value, "Email")}
+          >
             {({ field, form }: FieldProps) => (
               <FormControl
                 isInvalid={!!(form.errors.email && form.touched.email)}
               >
                 <FormLabel>Email</FormLabel>
-                <Input required {...field} placeholder="username@insta.com" />
+                <Input
+                  type="email"
+                  required
+                  {...field}
+                  placeholder="username@insta.com"
+                />
                 <FormErrorMessage>
                   {typeof form.errors.email === "string"
                     ? form.errors.email
@@ -48,18 +61,16 @@ export default function SignIn() {
             )}
           </Field>
 
-          <Field name="password">
+          <Field
+            name="password"
+            validate={(value: string) => validateValue(value, "Password")}
+          >
             {({ field, form }: FieldProps) => (
               <FormControl
                 isInvalid={!!(form.errors.password && form.touched.password)}
               >
                 <FormLabel mt={4}>Password</FormLabel>
-                <Input
-                  required
-                  {...field}
-                  type="password"
-                  placeholder="password"
-                />
+                <Input {...field} type="password" placeholder="password" />
                 <FormErrorMessage>
                   {typeof form.errors.password === "string"
                     ? form.errors.password
@@ -68,6 +79,7 @@ export default function SignIn() {
               </FormControl>
             )}
           </Field>
+
           <Button
             mt={4}
             colorScheme="teal"
@@ -75,6 +87,12 @@ export default function SignIn() {
             type="submit"
             w="50%"
             alignSelf="center"
+            isDisabled={
+              props.values.email === "" ||
+              props.values.password === "" ||
+              props.isSubmitting ||
+              !props.isValid
+            }
           >
             Submit
           </Button>

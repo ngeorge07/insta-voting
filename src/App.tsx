@@ -20,7 +20,7 @@ function App() {
           gap="10"
           align="center"
           maxW="md"
-          w={["80%", 400, 600]}
+          w={"80%"}
           mx="auto"
         >
           {loading ? (
