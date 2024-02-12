@@ -7,8 +7,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Field, Form, Formik, FieldProps } from "formik";
-import { auth } from "./createFirebase";
-import "./index.css";
+import { auth } from "../createFirebase";
 
 export default function SignIn() {
   function validateEmail(value: string) {

@@ -1,14 +1,12 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./createFirebase";
-import SignIn from "./SignIn";
-import VotingSection from "./VotingSection";
+import SignIn from "./components/SignIn";
+import VotingSection from "./components/VotingSection";
 import { Spinner, Flex, Heading } from "@chakra-ui/react";
 import "./index.css";
 
 function App() {
   const [user, loading] = useAuthState(auth);
-
-  console.log(loading);
 
   return (
     <main>

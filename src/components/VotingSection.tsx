@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { signOut } from "firebase/auth";
-import { auth } from "./createFirebase";
+import { auth } from "../createFirebase";
 
 export default function VotingSection() {
   return (
