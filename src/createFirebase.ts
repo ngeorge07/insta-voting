@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD-LJGhPtQvwlCEQh3PcN_-RuDAAR5u3-4",
-  authDomain: "voting-insta.firebaseapp.com",
-  projectId: "voting-insta",
+  apiKey: import.meta.env.VITE_FIREBASE_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
   storageBucket: "voting-insta.appspot.com",
   messagingSenderId: "566329160826",
-  appId: "1:566329160826:web:0e2dd9cd4130b4ad1f77c3",
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 initializeApp(firebaseConfig);
