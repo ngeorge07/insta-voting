@@ -31,14 +31,14 @@ export default function SignIn() {
       }}
     >
       {(props) => (
-        <Form className="w-1/2 mx-auto">
+        <Form className="w-full flex flex-col">
           <Field type="email" name="email" validate={validateEmail}>
             {({ field, form }: FieldProps) => (
               <FormControl
                 isInvalid={!!(form.errors.email && form.touched.email)}
               >
                 <FormLabel>Email</FormLabel>
-                <Input required {...field} placeholder="email" />
+                <Input required {...field} placeholder="username@insta.com" />
                 <FormErrorMessage>
                   {typeof form.errors.email === "string"
                     ? form.errors.email
@@ -53,7 +53,7 @@ export default function SignIn() {
               <FormControl
                 isInvalid={!!(form.errors.password && form.touched.password)}
               >
-                <FormLabel>Password</FormLabel>
+                <FormLabel mt={4}>Password</FormLabel>
                 <Input
                   required
                   {...field}
@@ -73,6 +73,8 @@ export default function SignIn() {
             colorScheme="teal"
             isLoading={props.isSubmitting}
             type="submit"
+            w="50%"
+            alignSelf="center"
           >
             Submit
           </Button>

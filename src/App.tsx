@@ -10,6 +10,17 @@ function App() {
 
   return (
     <main>
+      <Heading
+        textAlign="center"
+        maxW="2xl"
+        as="h1"
+        size="xl"
+        mx="auto"
+        my={10}
+      >
+        Inalta Curte de Justitie Maria Ungii 💅
+      </Heading>
+
       <Flex
         as="section"
         flexDirection="column"
@@ -19,10 +30,6 @@ function App() {
         w={["80%", 400, 600]}
         mx="auto"
       >
-        <Heading as="h2" size="xl">
-          Maria Ungii (evil brunch tarot barfa trauma dumping career
-          cancellation bunidepl)
-        </Heading>
         {loading ? (
           <Spinner
             thickness="4px"
