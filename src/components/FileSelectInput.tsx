@@ -16,6 +16,7 @@ export default function FileSelectInput({
 }: {
   formProps: FormikProps<{ files: undefined }>;
 }) {
+  // inputKey is used to reset the input field after the form is submitted
   const [inputKey, setInputKey] = useState(Date.now());
 
   function uploadImage(
