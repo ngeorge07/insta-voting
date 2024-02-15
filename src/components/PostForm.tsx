@@ -19,8 +19,6 @@ export default function PostForm() {
   // inputKey is used to reset the input field after the form is submitted
   const [inputKey, setInputKey] = useState(Date.now());
 
-  console.log(inputKey);
-
   async function createPost(
     form_username: string,
     form_reason: string,
@@ -91,7 +89,6 @@ export default function PostForm() {
       onSubmit={(values, actions) => {
         actions.setSubmitting(false);
 
-        // uploadImage(values, actions);
         createPost(
           values.form_username,
           values.form_reason,
@@ -116,16 +113,36 @@ export default function PostForm() {
             </Select>
           </FormControl>
 
-          <Field name="form_reason">
-            {({ field }: FieldProps) => (
-              <FormControl>
+          <Field
+            name="form_reason"
+            validate={() => {
+              let error;
+              if (!props.values.form_reason) {
+                error =
+                  "Sa acuzi pe cineva fara motiv e ca si cum ai plesni un bebelus. Nu se face!";
+              }
+              return error;
+            }}
+          >
+            {({ field, form }: FieldProps) => (
+              <FormControl
+                isInvalid={
+                  form.errors.form_reason && form.touched.form_reason
+                    ? true
+                    : false
+                }
+              >
                 <FormLabel>Zi de la ce v-ati luat</FormLabel>
                 <Textarea
                   required
                   {...field}
                   placeholder="M-a injurat de mama"
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>
+                  {typeof form.errors.form_reason === "string"
+                    ? form.errors.form_reason
+                    : ""}
+                </FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -139,7 +156,11 @@ export default function PostForm() {
             isLoading={props.isSubmitting}
             w="50%"
             alignSelf="center"
-            isDisabled={props.isSubmitting || !props.isValid}
+            isDisabled={
+              props.isSubmitting ||
+              !props.isValid ||
+              props.values.form_reason === ""
+            }
           >
             Submit
           </Button>

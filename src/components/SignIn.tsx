@@ -43,7 +43,9 @@ export default function SignIn() {
           >
             {({ field, form }: FieldProps) => (
               <FormControl
-                isInvalid={!!(form.errors.email && form.touched.email)}
+                isInvalid={
+                  form.errors.email && form.touched.email ? true : false
+                }
               >
                 <FormLabel>Email</FormLabel>
                 <Input
@@ -67,7 +69,9 @@ export default function SignIn() {
           >
             {({ field, form }: FieldProps) => (
               <FormControl
-                isInvalid={!!(form.errors.password && form.touched.password)}
+                isInvalid={
+                  form.errors.password && form.touched.password ? true : false
+                }
               >
                 <FormLabel mt={4}>Password</FormLabel>
                 <Input {...field} type="password" placeholder="password" />

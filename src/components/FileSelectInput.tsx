@@ -13,7 +13,7 @@ export default function FileSelectInput({ inputKey }: { inputKey: number }) {
       files &&
       Array.from(files).some((file) => !file.type.startsWith("image/"))
     ) {
-      error = "Invalid file type. Please upload an image file.";
+      error = "Esti parlitx, incarca si tu o poza ca tot omu'";
     }
 
     return error;
@@ -23,7 +23,7 @@ export default function FileSelectInput({ inputKey }: { inputKey: number }) {
     <Field name="files" validate={validateImageFile}>
       {({ form }: FieldProps) => {
         return (
-          <FormControl isInvalid={!!form.errors.files}>
+          <FormControl isInvalid={form.errors.files ? true : false}>
             <FormLabel>File</FormLabel>
             <Input
               key={inputKey}
