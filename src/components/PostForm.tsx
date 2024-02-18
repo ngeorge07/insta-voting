@@ -156,6 +156,13 @@ export default function PostForm() {
                   <Textarea
                     required
                     {...field}
+                    onChange={(event) => {
+                      const val = event.target.value;
+                      form.setFieldValue(
+                        field.name,
+                        val.charAt(0).toUpperCase() + val.slice(1)
+                      );
+                    }}
                     placeholder="M-a injurat de mama"
                   />
                   <FormErrorMessage>
